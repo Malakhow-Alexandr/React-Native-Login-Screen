@@ -1,50 +1,42 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  View,
-  TextInput,
-  TouchableWithoutFeedback,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  Alert,
-  Button,
+  Text,
+  SafeAreaView,
+  FlatList,
 } from "react-native";
 
+
+const COURSES = [
+  {
+    id: "45k6-j54k-4jth",
+    title: "HTML",
+  },
+  {
+    id: "4116-jfk5-43rh",
+    title: "JavaScript",
+  },
+  {
+    id: "4d16-5tt5-4j55",
+    title: "React",
+  },
+  {
+    id: "LG16-ant5-0J25",
+    title: "React Native",
+  },
+];
+
 export default function App() {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-
-  const nameHandler = (text) => setName(text);
-  const passwordHandler = (text) => setPassword(text);
-
-  const onLogin = () => {
-    Alert.alert("Credentials", `${name} + ${password}`);
-  };
+  const [courses, setCourses] = useState(COURSES);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-        >
-          <TextInput
-            value={name}
-            onChangeText={nameHandler}
-            placeholder="Username"
-            style={styles.input}
-          />
-          <TextInput
-            value={password}
-            onChangeText={passwordHandler}
-            placeholder="Password"
-            secureTextEntry={true}
-            style={styles.input}
-          />
-          <Button title={"Login"} style={styles.input} onPress={onLogin} />
-        </KeyboardAvoidingView>
-      </View>
-    </TouchableWithoutFeedback>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={courses}
+        renderItem={({ item }) => <Text>{item.title}</Text>}
+        keyExtractor={(item) => item.id}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -54,13 +46,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#ecf0f1",
-  },
-  input: {
-    width: 200,
-    height: 44,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "black",
-    marginBottom: 10,
   },
 });
