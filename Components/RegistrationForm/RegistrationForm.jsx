@@ -3,9 +3,10 @@ import {
   View,
   Text,
   TextInput,
-  StyleSheet,
   TouchableOpacity,
   Linking,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { RegistrationFormStyles as styles } from "./RegistrationFormStyles";
 
@@ -17,40 +18,44 @@ export const RegistrationForm = () => {
 
   return (
     <View>
-      <TextInput
-        placeholder="Login"
-        value={login}
-        onChangeText={setLogin}
-        style={styles.formInput}
-      />
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.formInput}
-      />
-      <View style={styles.passwordContainer}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+      >
         <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={securePassword}
+          placeholder="Login"
+          value={login}
+          onChangeText={setLogin}
           style={styles.formInput}
         />
-        <TouchableOpacity
-          activeOpacity={0.4}
-          style={styles.secureButton}
-          onPress={() => {
-            setSecurePassword(!securePassword);
-          }}
-        >
-          {securePassword ? (
-            <Text style={styles.secureButtonText}>Show</Text>
-          ) : (
-            <Text style={styles.secureButtonText}>Hide</Text>
-          )}
-        </TouchableOpacity>
-      </View>
+        <TextInput
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          style={styles.formInput}
+        />
+        <View style={styles.passwordContainer}>
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={securePassword}
+            style={styles.formInput}
+          />
+          <TouchableOpacity
+            activeOpacity={0.4}
+            style={styles.secureButton}
+            onPress={() => {
+              setSecurePassword(!securePassword);
+            }}
+          >
+            {securePassword ? (
+              <Text style={styles.secureButtonText}>Show</Text>
+            ) : (
+              <Text style={styles.secureButtonText}>Hide</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
       <TouchableOpacity activeOpacity={0.4} style={styles.submitButton}>
         <Text style={styles.submitButtonText}>Register</Text>
       </TouchableOpacity>
