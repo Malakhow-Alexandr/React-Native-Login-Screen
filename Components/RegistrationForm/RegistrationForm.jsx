@@ -16,6 +16,15 @@ export const RegistrationForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const formData = { login, email, password };
+
+  const handleFormSubmit = () => {
+    console.log(formData);
+    setLogin("");
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <View>
       <KeyboardAvoidingView
@@ -57,7 +66,9 @@ export const RegistrationForm = () => {
         </View>
       </KeyboardAvoidingView>
       <TouchableOpacity activeOpacity={0.4} style={styles.submitButton}>
-        <Text style={styles.submitButtonText}>Register</Text>
+        <Text style={styles.submitButtonText} onPress={handleFormSubmit}>
+          Register
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity activeOpacity={0.4} style={styles.singInLink}>
         <Text style={styles.singInLinkText}>

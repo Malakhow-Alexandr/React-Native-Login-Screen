@@ -22,6 +22,14 @@ export const RegistrationScreenStyles = StyleSheet.create({
     position: "absolute",
     top: "-17%",
   },
+  avatarContainerKeyboardShown: {
+    flex: 1,
+    width: 132,
+    height: 120,
+    position: "absolute",
+    top: "-17%",
+    transform: [{ translateY: -25 }],
+  },
   avatar: {
     width: 120,
     height: 120,

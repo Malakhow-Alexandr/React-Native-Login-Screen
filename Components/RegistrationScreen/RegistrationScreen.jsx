@@ -6,18 +6,16 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import { useKeyboard } from "@react-native-community/hooks";
 import { RegistrationScreenStyles as styles } from "./RegistrationScreenStyles";
 import { RegistrationForm } from "../RegistrationForm/RegistrationForm";
+import { AvatarContainer } from "../AvatarContainer/AvatarContainer";
 
 export const RegistrationScreen = () => {
+  const { keyboardShown } = useKeyboard();
   return (
     <View style={styles.container}>
-      <View style={styles.avatarContainer}>
-        <Image style={styles.avatar} />
-        <TouchableOpacity activeOpacity={0.4} style={styles.avatarButton}>
-          <Text style={styles.avatarButtonText}>&#43;</Text>
-        </TouchableOpacity>
-      </View>
+      <AvatarContainer />
       <Text style={styles.formTitle}>Registration</Text>
       <RegistrationForm />
     </View>

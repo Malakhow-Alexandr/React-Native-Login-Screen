@@ -5,52 +5,75 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { LoginFormStyles as styles } from "./LoginScreenFormStyle";
+import { useKeyboard } from "@react-native-community/hooks";
 
 export const LoginForm = () => {
   const [securePassword, setSecurePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const formData = { email, password };
+
+  const handleFormSubmit = () => {
+    console.log(formData);
+    setEmail("");
+    setPassword("");
+  };
+
+  const { keyboardShown } = useKeyboard();
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.formInput}
-      />
-      <View style={styles.passwordContainer}>
+    <View style={styles.formContainer}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+      >
         <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={securePassword}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
           style={styles.formInput}
         />
-        <TouchableOpacity
-          activeOpacity={0.4}
-          style={styles.secureButton}
-          onPress={() => {
-            setSecurePassword(!securePassword);
-          }}
-        >
-          {securePassword ? (
-            <Text style={styles.secureButtonText}>Show</Text>
-          ) : (
-            <Text style={styles.secureButtonText}>Hide</Text>
-          )}
+        <View style={styles.passwordContainer}>
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={securePassword}
+            style={styles.formInput}
+          />
+          <TouchableOpacity
+            activeOpacity={0.4}
+            style={styles.secureButton}
+            onPress={() => {
+              setSecurePassword(!securePassword);
+            }}
+          >
+            {securePassword ? (
+              <Text style={styles.secureButtonText}>Show</Text>
+            ) : (
+              <Text style={styles.secureButtonText}>Hide</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+      <View
+        style={
+          !keyboardShown ? styles.submitButtonContainer : styles.visuallyHidden
+        }
+      >
+        <TouchableOpacity activeOpacity={0.4} style={styles.submitButton}>
+          <Text style={styles.submitButtonText} onPress={handleFormSubmit}>
+            Sing In
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.4} style={styles.singInLink}>
+          <Text style={styles.singInLinkText}>
+            Don't have an account? Register
+          </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity activeOpacity={0.4} style={styles.submitButton}>
-        <Text style={styles.submitButtonText}>Register</Text>
-      </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.4} style={styles.singInLink}>
-        <Text style={styles.singInLinkText}>
-          Don't have an account? Register
-        </Text>
-      </TouchableOpacity>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
