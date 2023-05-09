@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { LoginFormStyles as styles } from "./LoginScreenFormStyle";
 import { useKeyboard } from "@react-native-community/hooks";
+import { useNavigation } from "@react-navigation/native";
 
 export const LoginForm = () => {
   const [securePassword, setSecurePassword] = useState(true);
@@ -23,6 +24,7 @@ export const LoginForm = () => {
     setPassword("");
   };
 
+  const navigation = useNavigation();
   const { keyboardShown } = useKeyboard();
   return (
     <View style={styles.formContainer}>
@@ -68,7 +70,11 @@ export const LoginForm = () => {
             Sing In
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.4} style={styles.singInLink}>
+        <TouchableOpacity
+          activeOpacity={0.4}
+          style={styles.singInLink}
+          onPress={() => navigation.navigate("Registration")}
+        >
           <Text style={styles.singInLinkText}>
             Don't have an account? Register
           </Text>

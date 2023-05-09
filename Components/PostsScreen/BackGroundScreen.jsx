@@ -5,10 +5,10 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { PostScreenStyles as styles } from "./PostScreenStyle";
+import { BackGroundScreenStyle as styles } from "./BackGroundScreenStyle";
 import BgImage from "../../assets/images/BG-2x.jpg";
 
-export const PostScreen = ({ children }) => {
+export const BackGroundScreen = ({ children }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>

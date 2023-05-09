@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const PostScreenStyles = StyleSheet.create({
+export const BackGroundScreenStyle = StyleSheet.create({
   container: {
     flex: 1,
   },

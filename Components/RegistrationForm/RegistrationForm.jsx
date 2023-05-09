@@ -9,6 +9,7 @@ import {
   Platform,
 } from "react-native";
 import { RegistrationFormStyles as styles } from "./RegistrationFormStyles";
+import { useNavigation } from "@react-navigation/native";
 
 export const RegistrationForm = () => {
   const [securePassword, setSecurePassword] = useState(true);
@@ -25,6 +26,7 @@ export const RegistrationForm = () => {
     setPassword("");
   };
 
+  const navigation = useNavigation();
   return (
     <View>
       <KeyboardAvoidingView
@@ -65,12 +67,18 @@ export const RegistrationForm = () => {
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
-      <TouchableOpacity activeOpacity={0.4} style={styles.submitButton}>
-        <Text style={styles.submitButtonText} onPress={handleFormSubmit}>
-          Register
-        </Text>
+      <TouchableOpacity
+        activeOpacity={0.4}
+        style={styles.submitButton}
+        onPress={handleFormSubmit}
+      >
+        <Text style={styles.submitButtonText}>Register</Text>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.4} style={styles.singInLink}>
+      <TouchableOpacity
+        activeOpacity={0.4}
+        style={styles.singInLink}
+        onPress={() => navigation.navigate("Login")}
+      >
         <Text style={styles.singInLinkText}>
           Already have an account? Sing In
         </Text>
