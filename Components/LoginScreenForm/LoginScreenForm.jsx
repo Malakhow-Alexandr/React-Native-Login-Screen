@@ -19,7 +19,10 @@ export const LoginForm = () => {
   const formData = { email, password };
 
   const handleFormSubmit = () => {
-    console.log(formData);
+    if (!email || !password) {
+      return alert("please enter your data");
+    }
+    navigation.navigate("Home");
     setEmail("");
     setPassword("");
   };

@@ -19,14 +19,18 @@ export const RegistrationForm = () => {
 
   const formData = { login, email, password };
 
+  const navigation = useNavigation();
+
   const handleFormSubmit = () => {
-    console.log(formData);
+    if (!login || !email || !password) {
+      return alert("please enter your data");
+    }
+    navigation.navigate("Home", { email, login });
     setLogin("");
     setEmail("");
     setPassword("");
   };
 
-  const navigation = useNavigation();
   return (
     <View>
       <KeyboardAvoidingView
