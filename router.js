@@ -9,7 +9,7 @@ const MainStack = createStackNavigator();
 export const useRoute = (isLogin) => {
   if (!isLogin) {
     return (
-      <MainStack.Navigator initialRouteName="Registration">
+      <MainStack.Navigator initialRouteName="LoginScreen">
         <MainStack.Screen
           options={{ headerShown: false }}
           name="Registration"
